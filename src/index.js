@@ -16,7 +16,7 @@ const fields =`?feilds=name,capital,population,flags,languages`;
 
 fetch(`${BASE_URL}/${nameCountries}${fields}`)
   .then(data => data.json())
-  .then((data) => console.log((data.capital)));
+  .then(({name, capital}) => console.log(name, capital));
 
 
 
@@ -24,7 +24,7 @@ fetch(`${BASE_URL}/${nameCountries}${fields}`)
 
  function onInputCountries (e) {
  e.preventDefault();
-console.log ("etarget",e.target.value);
+console.log ("target ",e.target.value);
 //  nameCountries = e.target.value.trim();
 
  console.log("cc",nameCountries);
