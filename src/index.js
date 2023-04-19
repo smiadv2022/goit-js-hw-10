@@ -3,32 +3,29 @@ import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
 const DEBOUNCE_DELAY = 300;
 
+import { fetchCountries } from './js/API';
+console.log (fetchCountries);
 const refs = {
-  inputFilter : document.getElementById ('search-box'),
-  rezultFilter : document.querySelector('country-info'),
+  inputFilter: document.getElementById('search-box'),
+  rezultFilter: document.querySelector('country-info'),
 };
 
-refs.inputFilter.addEventListener("input",debounce(onInputCountries,DEBOUNCE_DELAY ));
-nameCountries="sw";
-
-const BASE_URL='https://restcountries.com/v3.1/name';
-const fields =`?feilds=name,capital,population,flags,languages`;
-
-fetch(`${BASE_URL}/${nameCountries}${fields}`)
-  .then(data => data.json())
-  .then(({name, capital}) => console.log(name, capital));
+refs.inputFilter.addEventListener(
+  'input',
+  debounce(onInputCountries, DEBOUNCE_DELAY)
+);
 
 
-
-
-
- function onInputCountries (e) {
- e.preventDefault();
-console.log ("target ",e.target.value);
-//  nameCountries = e.target.value.trim();
-
- console.log("cc",nameCountries);
- }
+function onInputCountries(e) {
+  e.preventDefault();
+  const searchQuery = refs.inputFilter.value.trim();
+  console.log (searchQuery);
+  fetchCountries(searchQuery).then(res => {
+    const { name, flags } = res[0];
+    console.log(name.official);
+    console.log(flags.png);
+  });
+}
 
 
 
