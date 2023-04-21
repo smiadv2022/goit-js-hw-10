@@ -18,7 +18,6 @@ refs.inputFilter.addEventListener(
   debounce(onInputCountries, DEBOUNCE_DELAY)
 );
 
-
 async function onInputCountries(e) {
   e.preventDefault();
   const searchQuery = refs.inputFilter.value.trim();
